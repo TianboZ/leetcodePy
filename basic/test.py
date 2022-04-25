@@ -35,3 +35,13 @@ if 1 < 10 and 2 < 10:
 
 test(s)
 print(s)
+
+
+
+def loveElaine():
+  loveElaine()
+  print('love never stop!')
+
+
+
+loveElaine()
