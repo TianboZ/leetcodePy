@@ -18,8 +18,8 @@ class Solution:
       return True
     
     
-    for i in range(len(graph)):
-      if i not in visit and not dfs(i, 1): return False
+    for node in range(len(graph)):
+      if node not in visit and not dfs(node, 1): return False
     
     return True
         
