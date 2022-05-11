@@ -12,3 +12,4 @@ print(aa)
 # two dimention array
 matrix = [[i for i in range(4)] for i in range(3)]
 print(matrix)
+print(matrix[0][1])
