@@ -1,3 +1,9 @@
+def f(a, b):
+  pass
+
+a = 1  
+b = 2
+f(a, b)
 class Solution(object):
   def combinations(self, target, coins):
     """
