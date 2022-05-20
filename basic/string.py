@@ -9,6 +9,10 @@ s2 = s1[0:3]
 print(s2)
 print(id(s2))
 
+
+# access letter via index
+print(s1[4])
+
 # iterating through a string
 s3 = 'tianbo111'
 for char in s3:
@@ -34,7 +38,20 @@ s4 = " This will split all words into a list     ".split()
 print(s4)
 
 
-# string method: join
+# join
 list = ['aaa', '555', 'b']
 s5 = ''.join(list) # item in list must be str instance!!!
 print(s5)
+
+
+# split
+text= 'Love thy      neighbor        '
+print(text.split()) # splits at space
+grocery = 'Milk, Chicken, Bread'
+print(grocery.split(',')) # splits at ','
+print(grocery.split(':')) # Splits at ':'
+
+# strip
+text = '   a bb    '
+print(text.strip())
+print('length is: ', len(text.strip())) # 4
