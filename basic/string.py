@@ -55,3 +55,9 @@ print(grocery.split(':')) # Splits at ':'
 text = '   a bb    '
 print(text.strip())
 print('length is: ', len(text.strip())) # 4
+
+# check string is number
+txt = "565543 " # false
+x = txt.isnumeric()
+
+print(x)
