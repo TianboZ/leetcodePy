@@ -1,6 +1,8 @@
 
 from typing import *
-from UtilClass import *
+
+from UtilityClasses import TreeNode
+
 
 class Solution:
     res = []
@@ -9,7 +11,7 @@ class Solution:
       return self.res      
     
     def helper(self, root):
-      if root is None: return
+      if not root : return
       
       self.helper(root.left)
       self.res.append(root.val)

@@ -12,8 +12,14 @@ class Solution(object):
   def helper(self, res, root, min, max):
     if not root: return
 
+    if root.val >= min:
+      self.helper(res, root.left, min, max)
     
-    self.helper(res, root.left, min, max)
     if root.val >= min and root.val <= max:
       res.append(root.val)
-    self.helper(res, root.right, min, max)
+    
+    if root.val <= max:
+      self.helper(res, root.right, min, max)
+
+
+      

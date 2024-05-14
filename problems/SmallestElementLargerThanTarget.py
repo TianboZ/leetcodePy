@@ -5,7 +5,8 @@ class Solution(object):
     return: int
     """
     # write your solution here
-    if len(array) == 0: return -1
+    if not array or len(array) == 0: 
+      return -1
     
     lo = 0
     hi = len(array) - 1
@@ -25,5 +26,11 @@ class Solution(object):
 
 
 sol = Solution()
-res = sol.smallestElementLargerThanTarget([1,2,3,10], 3.3)
+test1 = [[1, 2, 3, 3.3, 3.4, 10], 3.3]
+test2 = [[3.4, 10], 3]
+
+res = sol.smallestElementLargerThanTarget(test1[0], test1[1])
+print('index: ', res)
+
+res = sol.smallestElementLargerThanTarget(test2[0], test2[1])
 print('index: ', res)

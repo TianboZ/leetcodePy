@@ -5,6 +5,14 @@ map = {
   'b': 2
 }
 
+# dynamic key
+
+x = 'dynamic_key'
+map[x] = 1
+
+print(map)
+print(map.get(x))
+
 # access elememt
 print(type(map.get('aa'))) # map['aa'] will throw error if key is not exist! use .get()
 
@@ -49,6 +57,10 @@ for n in list:
   count[n] = tmp
 
 print(count)
+
+
+# build graph
+edges = [[1, 2], [3, 4], [5]]   # 0: [1,2], 1: [3,4]  2:[5]
 
 
 

@@ -5,5 +5,7 @@ class Solution(object):
     return: int
     """
     # write your solution here
-    if root is None: return 0
-    return 1 + max(self.findHeight(root.left), self.findHeight(root.right))
+    if not root: return 0
+
+    return max(self.findHeight(root.left),self.findHeight(root.right)) + 1
+

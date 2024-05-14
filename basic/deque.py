@@ -1,7 +1,7 @@
-import collections
+from collections import deque
  
 # initializing deque
-queue = collections.deque([1,2,3])
+queue = deque([1,2,3])
  
 # using append() to insert element at right end
 # inserts 4 at the end of deque
@@ -32,5 +32,6 @@ print (queue)
 queue.popleft()
  
 # printing modified deque
-print ("The deque after deleting from left is : ")
-print (queue)
+print("The deque after deleting from left is : ")
+print(queue)
+print('size of deque:', len(queue))

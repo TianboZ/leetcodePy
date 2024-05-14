@@ -5,7 +5,8 @@ class Solution(object):
     return: int
     """
     # write your solution here
-    if len(array) == 0: return -1
+    if (not array) or len(array) == 0:
+      return -1
 
     lo = 0; hi = len(array) - 1;
     while lo + 1 < hi:

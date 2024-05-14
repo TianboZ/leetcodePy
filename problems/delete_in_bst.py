@@ -24,7 +24,7 @@ class Solution(object):
       root.right = self.deleteTree(root.right, key)
     
     return root
-
+  
   def successor(self, root):
     node = root
     while root.left:
@@ -32,3 +32,35 @@ class Solution(object):
     
     if root: return root
     return node
+
+  def deleteTree2(self, root, key):
+    # recursive rule
+    if not root: return root
+
+    #  recursive rule
+    if key > root.val:
+      root.right = self.deleteTree(root.right, key)
+      return root
+    elif key < root.val:
+      root.left = self.deleteTree(root.left, key)
+      return root
+    else:
+      if not root.left and not root.right:
+        return None
+      elif root.left and not root.right:
+        return root.left
+      elif not root.left and root.right: 
+        return root.right
+      else:
+        su = self.successor2(root.right)
+        root.val = su
+        root.right = self.deleteTree(root.right, su)
+        return root
+    return root
+
+  def successor2(self, root):
+    val = root.val
+    while root:
+      val = root.val
+      root = root.left
+    return val
