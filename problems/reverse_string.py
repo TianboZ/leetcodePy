@@ -1,7 +1,11 @@
 """
 sol1: iterative
+time: O(N)
+space: O(N)
 
 sol2: recursive
+time O(N)
+space O(1)
 """
 
 class Solution(object):
@@ -20,7 +24,9 @@ class Solution(object):
     if lo >= hi: return
     
     # recursive rule
-    arr[lo], arr[hi] = arr[hi], arr[lo]
+    tmp =  arr[lo] 
+    arr[lo] = arr[hi]
+    arr[hi] = tmp
 
     self.helper(arr, lo + 1, hi - 1)
 

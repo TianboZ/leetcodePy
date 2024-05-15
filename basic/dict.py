@@ -16,6 +16,12 @@ print(map.get(x))
 # access elememt
 print(type(map.get('aa'))) # map['aa'] will throw error if key is not exist! use .get()
 
+# check if exist
+if 'a' in map:
+  print('a in map')
+else:
+  print('a is not in map')
+
 # add or upldate elemnt
 map['c'] = 11
 print(map)
