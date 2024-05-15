@@ -28,7 +28,6 @@ class Solution:
         # expand
         curr = q.popleft()
         (row, col) = curr
-        rooms[row][col] = dis
 
         # generate
         for d in dir:
@@ -38,7 +37,7 @@ class Solution:
           if (x >= 0 and x < m and y >= 0 and y < n):
             if rooms[x][y] == empty:
               q.append((x, y))
-              rooms[x][y] = dis + 1
+              rooms[x][y] = dis + 1 # implictly mark visit! 
 
       dis += 1
 

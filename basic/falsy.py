@@ -16,4 +16,12 @@ if root is None:
 So, while both conditions can be used to check if root is None, if root is None explicitly checks for None, while if not root checks for any "falsy" value, which may include None as well as other values. The choice between them depends on the specific logic you want to implement.
 
 
+read
+https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/
+
 '''
+
+if []:
+  print(1) # wont print
+
+

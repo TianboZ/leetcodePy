@@ -1,6 +1,5 @@
-from os import pread
 from typing import *
-import heapq as heap
+import heapq
 
 """
 step1: 
@@ -23,7 +22,6 @@ class Cell:
   def __lt__(self, other):
     return self.val < other.val
 
-
 class Solution:
   def topKFrequent(self, nums: List[int], k: int) -> List[int]:
     map = {}
@@ -34,9 +32,9 @@ class Solution:
     pq = []  # min heap
 
     for key, val in map.items():
-      heap.heappush(pq, Cell(key, val))
+      heapq.heappush(pq, Cell(key, val))
       if len(pq) > k:
-        heap.heappop(pq)
+        heapq.heappop(pq)
 
     res = []
     for i in pq:
@@ -46,6 +44,7 @@ class Solution:
 
 sol = Solution()
 
+# test
 res = sol.topKFrequent([1,2,3,2,2,2,2,2,2,1,1,1,1,3,4,4,5], 3)
 print(res)
 

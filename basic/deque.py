@@ -2,6 +2,8 @@ from collections import deque
  
 # initializing deque
 queue = deque([1,2,3])
+
+print(type(queue))  # <class 'collections.deque'>
  
 # using append() to insert element at right end
 # inserts 4 at the end of deque
