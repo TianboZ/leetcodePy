@@ -56,6 +56,7 @@ class Solution(object):
 
 
 
+
 # test
 matrix = [[1,2],[1,3]]
 sol = Solution()

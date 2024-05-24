@@ -34,12 +34,37 @@ class Solution(object):
         pq.append(Cell(v))
         heapq.heapify(pq)
       else:
-        if len(pq) > 0 and  v < pq[0].v:
-          heapq.heappop(pq)
-          heapq.heappush(pq, Cell(v))
+        # 无脑push, pop 
+        heapq.heappush(pq, Cell(v))
+        heapq.heappop(pq)
       
 
     while pq:
-      res.append(heapq.heappop(pq))
+      res.append(heapq.heappop(pq).v)
 
     return res
+  
+
+
+# use min heap
+class Solution2(object):
+  def kSmallest(self, array, k):
+    pq = []  # min heap
+    
+    for i in array:
+      heapq.heappush(pq, i)      
+      if len(pq) > k:
+        heapq.heappop(pq)
+    
+    print(pq)
+
+
+
+# test
+sol = Solution()
+res = sol.kSmallest([1, 2, 3, -1, 100, -2], 3)
+print(res)
+
+
+sol2 = Solution2()
+sol2.kSmallest([1, 2, 3, -1, 100, -2], 3)

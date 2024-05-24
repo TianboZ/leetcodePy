@@ -36,3 +36,6 @@ else:
 # set metod: clear
 set1.clear()
 print(set1)
+
+
+

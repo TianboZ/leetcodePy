@@ -61,3 +61,9 @@ txt = "565543 " # false
 x = txt.isnumeric()
 
 print(x)
+
+
+
+print(str([1,2,3]))
+print(str([1,2,3]))
+print(str([1,2,3]))
