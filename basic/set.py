@@ -24,7 +24,7 @@ set1.discard(2999)   # Removes an element from set if it is a member. (Do nothin
 
 
 #   set method: remove
-set1.remove(2)   # Removes an element from a set. If the element is not present in the set, raise a KeyError
+# set1.remove(2)   # Removes an element from a set. If the element is not present in the set, raise a KeyError
 
 # check element in set
 if "yes" in set1:
@@ -36,6 +36,12 @@ else:
 # set metod: clear
 set1.clear()
 print(set1)
+
+# hashing
+set2 = set()
+set2.add(str([1,2,3]))
+set2.add(str([1,2,3]))
+print('set2 size:',len(set2))
 
 
 

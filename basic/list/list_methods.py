@@ -34,3 +34,12 @@ print(arr3)
 
 # deep copy array
 
+# unpack
+a, b, c = [1,2,3]
+print('a=', c, 'b=', b, 'c=', c)
+
+
+# contains
+arr = [1,2,3]
+if 1 in arr: 
+  print('1 in [1,2,3]') # 1 in [1,2,3]

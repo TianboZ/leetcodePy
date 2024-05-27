@@ -62,8 +62,6 @@ x = txt.isnumeric()
 
 print(x)
 
-
-
-print(str([1,2,3]))
-print(str([1,2,3]))
-print(str([1,2,3]))
+# ASCII a=97
+letters = [chr(i) for i in range(97, 97 + 26)]
+print(letters)

@@ -10,40 +10,38 @@ from typing import List
 
 
 class Solution:
-  def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-		visit = set()
-		graph = self.get_graph(edges)
-		return self.dfs(source, graph, visit, destination)
+  def leadsToDestination(
+    self, n: int, edges: List[List[int]], source: int, destination: int
+  ) -> bool:
+    visit = set()
+    adj = {}
+    self.getGraph(adj, edges)
+    return self.dfs(source, adj, visit, destination)
 
-	def get_graph(self, edges):
-		map = {}
-		for a, b in edges:
-			if map.get(a):
-				map[a].append(b)
-			else:
-				map[a] = [b]
-		print(map)
-		return map
+  def getGraph(self, adj, edges):
+    for a, b in edges:
+      if adj.get(a):
+        adj[a].append(b)
+      else:
+        adj[a] = [b]
     
-	# return false if can't reach to target 
-	def dfs(self, node, graph, visit, target):
-		# basecase
-		if node in visit:
-			return False
-		
-		if node == target:
-			return True
+  # return false if can't reach to target
+  def dfs(self, node, adj, visit, target):
+    # basecase
+    if node in visit:
+      return False
 
-		# recursive rule
-		visit.add(node)
-		for nei in graph[node]:
-			if not self.dfs(nei, graph, visit, target):
-				return False
-		visit.remove(node)
+    if node not in adj:
+      return False
 
-		return True  
-	
+    # recursive rule
+    visit.add(node)
+    for nei in adj.get(node):
+      if not self.dfs(nei, adj, visit, target):
+        return False
+    visit.remove(node)
+    return True
 
 sol = Solution()
-res = sol.leadsToDestination(4, [[0,1],[0,3],[1,2],[2,1]], 0, 3)
+res = sol.leadsToDestination(4, [[0,1],[1,1]], 0, 1)
 print(res)
