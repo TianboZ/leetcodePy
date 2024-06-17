@@ -6,19 +6,23 @@ https://neetcode.io/problems/dijkstra
 import heapq
 from typing import Dict, List
 
+import heapq
+
 class Solution:
   # dedupe at generate
   def shortestPath(self, n: int, edges: List[List[int]], src: int) -> Dict[int, int]:
     # build grpah
-    adj = {}
+    adj = {}    # i: [total dis from src to current node, node]
     for i in range(n):
-        adj[i] = []
+      adj[i] = []
     
     for start, end, weight in edges:
-        adj[start].append([end, weight])
-    
-    visit = {}
-    heap = [[0, src]] # min heap    [total dis to node, node]
+      adj[start].append([end, weight])    
+
+    visit = {}  # mark visited when generating
+
+    # initial
+    heap = [[0, src]] # min heap   
     visit[src] = 0
 
     while heap:
@@ -29,7 +33,7 @@ class Solution:
       # generate
       for n2, w2 in adj[n1]:
         dis = w1 + w2
-
+        # if n2 in visit: continue         WRONG!  because in future, it nevers get update if there is better value
         if n2 not in visit or dis < visit.get(n2):
           heapq.heappush(heap, [dis, n2])
           visit[n2] = dis
@@ -43,15 +47,16 @@ class Solution:
   # deduplicate at expansion
   def shortestPath2(self, n: int, edges: List[List[int]], src: int) -> Dict[int, int]:
     # build grpah
-    adj = {}
+    adj = {}   # i: [total dis from src to current node, node]
     for i in range(n):
       adj[i] = []
-    
+        
     for start, end, weight in edges:
       adj[start].append([end, weight])
-    
-    visit = {}
-    heap = [[0, src]] # min heap    [total dis to node, node]
+        
+    # initail 
+    visit = {}   # mark visited when expanding
+    heap = [[0, src]] # min heap   
 
     while heap:
       # expand
@@ -67,14 +72,18 @@ class Solution:
       # generate
       for n2, w2 in adj[n1]:
         dis = w1 + w2
-        # each node can generate multi times
+        # each node can generate multi times, but with differernt dis. later generated cound be better `dis`
         heapq.heappush(heap, [dis, n2])
 
     for i in range(n):
-      if i not in visit:
+      if  i not in visit:
         visit[i] = -1
 
     return visit
+        
+
+
+
       
 # test
 n=5

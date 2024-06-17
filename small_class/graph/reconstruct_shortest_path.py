@@ -117,18 +117,16 @@ class Solution:
 
   def dfs(self, node, target, path, res, prev):
     #  base case
-
-    # recursive rule
-    path.append(node)
-    
     if node == target:
       tmp = path.copy()
+      tmp.append(node)
       tmp.reverse()
       res.append(tmp)
     
+    # recursive rule
+    path.append(node)
     for nei in prev.get(node, []):
       self.dfs(nei, target, path, res, prev)
-    
     path.pop()
 
 #test

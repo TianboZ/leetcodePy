@@ -7,3 +7,5 @@ solution:
   if any node not reachable., not tree
 
 '''
+
+LC: depth of forest
