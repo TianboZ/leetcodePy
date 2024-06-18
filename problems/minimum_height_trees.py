@@ -2,7 +2,6 @@ from ast import Tuple
 from collections import deque
 from typing import Dict, List
 
-
 class Solution:
   def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
     # sanity check

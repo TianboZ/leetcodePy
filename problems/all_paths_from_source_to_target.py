@@ -1,5 +1,14 @@
 from typing import List
 
+"""
+solution:
+1. DFS3, mark visited 3
+most straight forward method
+
+time: O(b^level)
+space: O(level)
+
+"""
 
 class Solution:
   def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:

@@ -21,40 +21,41 @@ space
 '''
 
 class Solution:
-    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
-      seen = set()
-      graph = self.get_graph(edges)
-      return self.dfs(source, destination, seen, graph)
+  def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+    visit = set()
+    adj = {}
+    graph = self.getGraph(edges, adj)
+    return self.dfs(source, destination, visit, graph)
 
-    def get_graph(self, edges: List[List[int]]):
-      graph = {}
-      for n1, n2 in edges:
-        if graph.get(n1):
-          graph.get(n1).append(n2)
-        else:
-          graph[n1] = [n2]
-        
-        if graph.get(n2):
-          graph.get(n2).append(n1)
-        else:
-          graph[n2] = [n1]
+  def getGraph(self, edges: List[List[int]], adj):
+    for n1, n2 in edges:
+      if adj.get(n1):
+        adj.get(n1).append(n2)
+      else:
+        adj[n1] = [n2]
       
-      return graph
+      if adj.get(n2):
+        adj.get(n2).append(n1)
+      else:
+        adj[n2] = [n1]
+    
+    return adj
 
-    def dfs(self, curr, end, seen, graph):
-      # basecase
-      if curr == end: 
-        return True
-      if curr in seen:
-        return False
-
-      # recursive rule
-      seen.add(curr)
-      for nei in graph.get(curr):
-        res = self.dfs(nei, end, seen, graph)
-        if res: 
-          return True
+  # return true if find the node
+  def dfs(self, curr, end, visit, graph)->bool:
+    # basecase
+    if curr == end: 
+      return True
+    if curr in visit:
       return False
+
+    # recursive rule
+    visit.add(curr)
+    for nei in graph.get(curr):
+      res = self.dfs(nei, end, visit, graph)
+      if res: 
+        return True
+    return False
 
     
 sol = Solution()

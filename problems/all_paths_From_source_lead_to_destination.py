@@ -1,5 +1,6 @@
 '''
-solution:
+solution1:
+based on DFS3, find all paths
 find all paths from src, check the end node is target
 
 optimization:
@@ -20,6 +21,15 @@ worst case: O(branch ^ level) = O(V ^ V)
 space
 O(V)
 
+
+solution2:
+based on DFS2, find all reachable nodes
+
+time
+O(V + E)
+
+space 
+O(V)
 
 
 '''
@@ -68,6 +78,43 @@ class Solution:
     return True
 
 
-sol = Solution()
+class Solution2:
+  def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+    adj = {}
+    self.getGraph2(adj, edges)
+    visit = {} # node: status     1: visiting.  2: visited
+    return self.dfs2(source, visit, destination, adj)
+
+  # return true if from node, all paths lead to dst
+  def dfs2(self, node, visit: dict, dst, adj: dict)->bool:  
+    # base case
+    if visit.get(node) == 1: # detect cycle
+      return False 
+
+    if visit.get(node) == 2: # visited
+      return True
+    
+    # leaf node
+    neis = adj.get(node, [])
+    if not neis:
+      return node == dst
+
+    # recursive rule
+    visit[node] = 1
+    
+    for nei in neis:
+      res = self.dfs2(nei, visit, dst, adj)
+      if not res: return False
+
+    visit[node] = 2
+    return True
+  
+  def getGraph2(self, adj: dict, edges):
+    for a, b in edges:
+      neis = adj.get(a, [])
+      neis.append(b)
+      adj[a] = neis
+
+sol = Solution2()
 res = sol.leadsToDestination(4, [[0,1],[1,1]], 0, 1)
 print(res)
