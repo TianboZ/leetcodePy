@@ -65,3 +65,8 @@ print(x)
 # ASCII a=97
 letters = [chr(i) for i in range(97, 97 + 26)]
 print(letters)
+
+
+ssss = '12345'
+for i in ssss:
+  print(i)
