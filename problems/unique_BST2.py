@@ -17,7 +17,7 @@ class Solution:
   # [lo, hi] is BST value range, min, max is global range. dfs function
   # returns array of root
   # res stores all BST root
-  def dfs(self, min, max):
+  def dfs(self, min, max)->List[TreeNode]:
     # base case
     if min > max: return [None]
 
@@ -25,10 +25,10 @@ class Solution:
     res = []
     for v in range(min, max + 1):
       
-      left_nodes = self.dfs(min, v - 1 )
-      right_nodes = self.dfs(v + 1, max)
-      for left in left_nodes:
-        for right in right_nodes:
+      leftNodes = self.dfs(min, v - 1 )
+      rightNodes = self.dfs(v + 1, max)
+      for left in leftNodes:
+        for right in rightNodes:
           root = TreeNode(v)
           root.left = left
           root.right = right
