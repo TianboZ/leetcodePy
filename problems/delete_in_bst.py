@@ -32,8 +32,8 @@ class Solution(object):
     
     if root: return root
     return node
-
-  def deleteTree2(self, root, key):
+class Solution2:
+  def deleteTree(self, root, key):
     # recursive rule
     if not root: return root
 

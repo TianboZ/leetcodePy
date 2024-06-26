@@ -4,29 +4,35 @@ class Node:
     def __init__(self, val = 0, neighbors = None):
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
+
+
+solution:
+
+time
+O(V + E)
+space
+O(V)
 """
 from UtilityClasses import Node
 from typing import Optional
 class Solution:
   def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
     # sanity check
-    if not node: return None
-
     visit = {}
     return self.dfs(node, visit)
 
   # input node, return cloned node
-  def dfs(self, node, visit):
+  def dfs(self, node, visit: dict):
     # base case
-    if not node: return None
-    
-    if node.val in visit:
-      return visit[node.val]
+    if not node:
+      return None
+
+    if node in visit:
+      return visit.get(node)
 
     # recursive rule
-    val = node.val
-    copy = Node(val, [])
-    visit[val] = copy
+    copy = Node(node.val, [])
+    visit[node] = copy
 
     for nei in node.neighbors:
       copy.neighbors.append(self.dfs(nei, visit))

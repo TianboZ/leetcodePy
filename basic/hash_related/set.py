@@ -15,10 +15,6 @@ print(set1)
 set1.pop()
 print(set1)
 
-
-
-
-
 # set method: discard
 set1.discard(2999)   # Removes an element from set if it is a member. (Do nothing if the element is not in set)
 
@@ -42,6 +38,12 @@ set2 = set()
 set2.add(str([1,2,3]))
 set2.add(str([1,2,3]))
 print('set2 size:',len(set2))
+
+set3 = set()
+arr1 = [1, 2]
+arr2 = [1, 2]
+set3.add(arr1) # unhashable type: 'list'
+print(set3)
 
 
 
