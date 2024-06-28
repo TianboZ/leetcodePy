@@ -35,3 +35,22 @@ class Solution(object):
         if node.right:
           q.append(node.right)
     return res    
+  
+
+class Solution2(object):
+  def rightView(self, root):
+    self.res = []
+    map = {}  # key: level    value: right view treenode's val
+    self.dfs(root, 0, map)
+    return self.res
+  
+  def dfs(self, root, level, map):
+    if not root:
+      return
+    
+    if level not in map:
+      map[level] = root.val
+      self.res.append(root.val)
+    
+    self.dfs(root.right, level + 1, map)
+    self.dfs(root.left, level + 1, map)
