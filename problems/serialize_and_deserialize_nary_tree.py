@@ -16,7 +16,7 @@ solution:
 
 every node has children information with it
 
-serialize: 1#3, 2#1, 5#1, 3#1, 4#1
+preorder serialize: 1#3, 2#1, 5#1, 3#1, 4#1
 
 1#3 meaning: 1 is node value, 3 is child count
 

@@ -1,3 +1,20 @@
+"""
+soluiton:
+      1
+    /  \
+   2     3
+  /\    /   \
+ #  #   #    4 
+            / \
+           #   #  
+               
+
+null node use # prepresent
+preorder serialize: [1, 2, #, #, 3, #, 4, #, #]  
+
+"""
+
+
 class TreeNode:
   def __init__(self, val, left = None, right = None):
     self.val = val
@@ -84,7 +101,9 @@ node4.right = node5
       /
      4
      \
-       5    
+       5  
+
+serialize: [1, 2, '', '', 3, 4, '', 5, '', '', '']      
 """
 
 s = sol.serialize(node)

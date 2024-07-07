@@ -1,12 +1,18 @@
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
 from UtilityClasses import TreeNode
 
+"""
+soluiton:
+      4
+    /  \
+   2     5
+           \
+            6 
+
+null node use # prepresent
+preorder serialize: [4, 2, 5, 6], no need # delimiter to present as null node
+
+
+"""
 
 class Codec:
 

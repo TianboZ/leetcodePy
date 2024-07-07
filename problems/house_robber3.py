@@ -4,6 +4,17 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+"""
+soluiton:
+return pair [max sum if rob root, max sum not rob root]
+
+complexity:
+time O(n)
+space O(tree height) = O(logn)
+
+"""
+
 from typing import List, Optional
 
 
