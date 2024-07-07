@@ -70,3 +70,7 @@ print(letters)
 ssss = '12345'
 for i in ssss:
   print(i)
+
+#check if a string is substring 
+# https://www.geeksforgeeks.org/check-if-string-contains-substring-in-python/
+print('tianbo' in 'tianbo1')
