@@ -1,5 +1,4 @@
 import heapq
-from heapq import heapify, heappop, heappush
 
 '''
 1. heapify is inplace operation
@@ -36,4 +35,10 @@ while maxHeap:
   print(res)
   pass
 
+# heap item is array, will compare with first element of iterable, if first element equal, fallback to second element, ....
+minheap = [[2, 10], [2, 1], [1,2], [0, 1]]
+heapq.heapify(minheap)
+while minheap:
+  curr = heapq.heappop(minheap)
+  print(curr)  # [0, 1]  [1, 2]  [2, 1]  [2, 10]
 

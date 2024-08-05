@@ -55,10 +55,10 @@ print('a' in map)
 
 
 # count freqency
-list = [1, 2, 2, 2, 'a', 'a']
+arr = [1, 2, 2, 2, 'a', 'a']
 
 count = {}
-for n in list:
+for n in arr:
   tmp = count.get(n, 0) + 1
   count[n] = tmp
 
@@ -69,4 +69,16 @@ print(count)
 edges = [[1, 2], [3, 4], [5]]   # 0: [1,2], 1: [3,4]  2:[5]
 
 
+adj = collections.defaultdict(list)
+adj[1].append(2)
+adj[2].append(1)
+print(adj)
+print(adj.get(3))
 
+
+adj2 = collections.defaultdict(set)
+adj2[1].add(1)
+adj2[1].add(2)
+adj2[1].add(2)
+
+print(adj2)

@@ -1,3 +1,0 @@
-primative 
-
-not primate

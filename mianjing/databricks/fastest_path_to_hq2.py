@@ -53,74 +53,22 @@ cost_matrix = {0, 1, 3, 2};
 time_matrix = {3, 2, 1, 1};
 
 '''
+#                            ["Walk", "Bike", "Car", "Train"]
+# Cost Matrix (Dollars/Block): [0,      1,      3,     2]
+# Time Matrix (Minutes/Block): [3,      2,      1,     1]
+# 1 = Walk, 2 = Bike, 3 = Car, 4 = Train
+
 
 from collections import deque
+from unittest import result
 
-class Solution:
-  def shortestPath(self, grid):
-    m = len(grid)
-    n = len(grid[0])
-    start = []
-    for i in range(m):
-      for j in range(n):
-        if grid[i][j] == 'S':
-          start = [i ,j]
-    
-    res = []  # [[time, cost, mode], [] ]
-    map = {
-      '1': [0, 3],  # cost, time
-      '2': [1, 2],
-      '3': [3, 1],
-      '4': [2, 1]
-    }
-    for mode in ['1', '2', '3', '4']:
-      visit = [[False for _ in range(n)] for _ in range(m)]
-      dis = self.bfs(grid, m, n, visit, start[0], start[1], mode)
-      print('dis', dis)
-      if dis > 0:
-        time = map[mode][1] * dis
-        cost = map[mode][0] * dis
-        res.append([time, cost, mode])
 
-    res.sort()
-    print(res[0])
-    print(res)
-  
-  def bfs(self, grid, m, n, visit, i, j, mode):
-    dir = [[1, 0], [-1, 0], [0, 1], [0, -1]]
-    dis = 0
-    # init
-    queue = deque([])
-    queue.append([i, j])
-    visit[i][j] = True
-    
-    # terminate
-    while queue:
-      size = len(queue)
-      for _ in range(size):
-        # expand
-        curr = queue.popleft()
-        # print(curr)
-        x, y = curr
-
-        if grid[x][y] == 'D':
-          return dis
-
-        # terminate
-        for dx, dy in dir:
-          x2 = dx + x
-          y2 = dy + y
-          if 0 <= x2 < m and 0 <= y2 < n:
-            if  grid[x2][y2] == 'D':
-              return dis + 1
-            if grid[x2][y2] == mode and not visit[x2][y2]:
-              visit[x2][y2] = True
-              queue.append([x2, y2])
-      dis += 1
-
-    return -1
-
-sol = Solution()
+cost = {
+  '1': [0, 3], # [cost, time]
+  '2': [1, 2],
+  '3': [3, 1],
+  '4': [2, 1]
+}
 grid = [
   ['3', '3', 'S', '2', 'X', 'X'],
   ['3', '1', '1', '2', 'X', '2'],
@@ -129,4 +77,66 @@ grid = [
   ['3', '3', '3', '3', '3', '4'],
   ['4', '4', '4', '4', '4', '4']
 ]
-sol.shortestPath(grid)
+
+class Solution:
+  def findTranspotation(self, grid):
+    modes = ['1', '2', '3', '4']
+    results = [] # []
+    for mode in modes:
+      res = self.bfs(mode, grid)
+      print(res)
+      if res == -1:
+        continue
+      results.append([cost[mode][1] * res, cost[mode][0] * res, mode])
+    
+    results.sort()
+    print(results)
+    print('fatest transpotation is:', results[0][2], 'cost is:', results[0][1])
+    return results[0][2]
+
+  def bfs(self, mode, grid):
+    m = len(grid)
+    n = len(grid[0])
+    dir = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+    # find start point
+    for i in range(m):
+      for j in range(n):
+        if grid[i][j] == 'S':
+          start = [i, j]
+    
+    visit = [[ False for _ in range(n)] for _ in range(m)]
+    queue = deque([])
+
+    # init
+    dis = 0
+    i = start[0]
+    j = start[1]
+    visit[i][j] = True
+    queue.append([i, j])
+
+    # terminate
+    while queue:
+      size = len(queue)
+      for _ in range(size):
+        # expand 
+        x, y = queue.popleft()
+        if grid[x][y] == 'D':
+          return dis - 1
+
+        # generate
+        for dx, dy in dir:
+          x2 = x + dx
+          y2 = y + dy
+
+          if 0 <= x2 < m and 0 <= y2 < n and not visit[x2][y2]:
+            if grid[x2][y2] == mode or grid[x2][y2] == 'D':
+              queue.append([x2, y2])
+              visit[x2][y2] = True
+
+      dis += 1  
+
+    return -1
+
+
+sol = Solution()
+sol.findTranspotation(grid)
