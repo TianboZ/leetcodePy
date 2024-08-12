@@ -39,5 +39,10 @@ print(arr == arr2) # false
 # compare 2 list w/o order
 print(Counter(arr) == Counter(arr2)) # true
 
+# python natural tuple/list comparison behavior
+print([1, 2, 3] < [1, 2, 4])  # True, because 3 < 4
+print([1, 2, 3] > [1, 2, 2])  # True, because 3 > 2
+print([1, 2] < [1, 2, 3])     # True, because the first list is shorter
+
 
 

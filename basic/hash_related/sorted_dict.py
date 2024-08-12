@@ -8,16 +8,16 @@ https://leetcode.com/discuss/study-guide/1515408/using-python3-sorteddict-effect
 
 from sortedcontainers import SortedDict
 
-map = SortedDict({1:1, 2:2, 3:3})
-print(map)
+sd = SortedDict({1:1, 2:2, 3:3})
+print(sd)
 
 
 def findLargestSmallerEqual(target):
-  index = map.bisect_right(target)
+  index = sd.bisect_right(target)
   # Adjust index to get the largest smaller or equal value
   if index > 0:
     index -= 1
-    key, value = map.peekitem(index)  # Get the key at that index
+    key, value = sd.peekitem(index)  # Get the key at that index
     print(f"The largest smaller or equal value to {target} is {value}, index={index}")
   else:
     print(f"No value smaller or equal to {target} found.")
@@ -35,10 +35,10 @@ findLargestSmallerEqual(target)
 
 
 def findSmallestLarger(target):
-  index = map.bisect_right(target)
+  index = sd.bisect_right(target)
   # Adjust index to get the largest smaller or equal value
-  if index < len(map):
-    key, value = map.peekitem(index)  # Get the key at that index
+  if index < len(sd):
+    key, value = sd.peekitem(index)  # Get the key at that index
     print(f"The smallest larger value than {target} is {value}, index={index}")
   else:
     print(f"No value larger than {target} found.")

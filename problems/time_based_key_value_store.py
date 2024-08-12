@@ -1,23 +1,29 @@
-map = SortedDict({1:1, 2:2, 3:3})
-print(map)
+from sortedcontainers import SortedDict
 
+class TimeMap:
+  def __init__(self):
+    self.map = {}  # <key: <time: value>>
 
-def findLargestSmallerEqual(target):
-  index = map.bisect_right(target)
-  # Adjust index to get the largest smaller or equal value
-  if index > 0:
-    index -= 1
-    key, value = map.peekitem(index)  # Get the key at that index
-    print(f"The largest smaller or equal value to {target} is {value}, index={index}")
-  else:
-    print(f"No value smaller or equal to {target} found.")
+  def set(self, key: str, value: str, timestamp: int) -> None:
+    if key not in self.map:
+      sd = SortedDict()
+      self.map[key] = sd
+      self.map[key][timestamp] = value
+    else:
+      self.map[key][timestamp] = value
 
+  def get(self, key: str, timestamp: int) -> str:
+    if key not in self.map:
+      return ""
+    else:
+      if timestamp in self.map[key]:
+        return self.map[key][timestamp]
+      else:
+        sd: SortedDict = self.map[key]
+        prevTimeIdx = sd.bisect_right(timestamp)
+        if prevTimeIdx > 0:
+          prevTimeIdx -= 1
+          k, v = sd.peekitem(prevTimeIdx)
+          return v
 
-target = 0.1
-findLargestSmallerEqual(target)
-
-target = 2.5
-findLargestSmallerEqual(target)
-
-target = 4  # 4 is larger than all values
-findLargestSmallerEqual(target)
+        return ""
