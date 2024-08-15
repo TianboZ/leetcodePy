@@ -1,3 +1,5 @@
+
+#  i copy idea from https://www.1point3acres.com/bbs/thread-918027-1-1.html
 from bisect import bisect_right
 from collections import defaultdict
 

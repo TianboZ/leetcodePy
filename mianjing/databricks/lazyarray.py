@@ -3,6 +3,7 @@ class LazyArray:
     self.arr = arr
     self.cbs = []
 
+  # time O(n) 
   def map(self, cb) ->'LazyArray':
     newCbs = self.cbs.copy()
     newCbs.append(cb)
