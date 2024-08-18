@@ -78,13 +78,13 @@ class Revenue:
     
     idx = self.revenueToId.bisect_left(val)
     if idx != len(self.revenueToId):
-      k, v = self.revenueToId.peekitem(idx)
+      # k, v = self.revenueToId.peekitem(idx)
       # print(k, v)
 
       i = 0
-      while idx + i < len(self.revenueToId):
-        k, v = self.revenueToId.peekitem(idx + i)
-        print(k, v)
+      while idx + i < len(self.revenueToId) and i < k :
+        key, v = self.revenueToId.peekitem(idx + i)
+        print(key, v)
         for id in v:
           res.add(id)
         i += 1
@@ -95,10 +95,11 @@ revenue = Revenue()
 revenue.insert(10)
 revenue.insert2(20, 0)
 revenue.insert2(40 ,1)
-revenue.insert(40)
-revenue.insert(40)
+# revenue.insert(40)
+# revenue.insert(40)
 
 
 print(revenue.revenueToId)
+print(revenue.idToRevenue)
 
-print(revenue.get_lowest_k_by_total_revenue(2, 30))
+print(revenue.get_lowest_k_by_total_revenue(1, 40))

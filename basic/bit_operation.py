@@ -1,3 +1,10 @@
+"""
+
+https://www.geeksforgeeks.org/python-bitwise-operators/
+https://www.geeksforgeeks.org/binary-decimal-vice-versa-python/
+
+"""
+
 n = 44
 
 # method 1

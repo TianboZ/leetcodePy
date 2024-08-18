@@ -22,7 +22,7 @@ class Game:
     self.grid = [[ None for _ in range(n)] for _ in range(m)]  # m x n board 
     self.map = {
       1: 'x',
-      2: '0'
+      2: 'O'
     }
     self.winCnt = cnt
 
@@ -46,12 +46,11 @@ class Game:
           x2 += dx
           y2 += dy
       if cnt >= self.winCnt:
+        for row in self.grid:
+          print(row)
         return player
       
     return 0
-
-
-      
 
   # check if x,y is in bound
   def isValid(self, x, y)->bool:

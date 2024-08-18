@@ -4,6 +4,7 @@ class LazyArray:
     self.cbs = cbs
 
   # time O(n)
+  # space o(n)
   def map(self, cb)->'LazyArray':
     return LazyArray(self.values,  cbs=self.cbs + [cb])
   
