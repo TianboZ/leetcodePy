@@ -1,5 +1,5 @@
-from ast import Tuple
 from collections import deque
+import collections
 from typing import Dict, List
 
 class Solution:
@@ -7,32 +7,37 @@ class Solution:
     # sanity check
     if not edges: return [0]
     
-    adj = {}
-    self.getGraph(edges, adj)
+    adj = collections.defaultdict(list)
+    for a, b in edges:
+      adj[a].append(b)
+      adj[b].append(a)
 
     leaf, _ = self.bfs(0, adj)
-    leaf2, map = self.bfs(leaf, adj)
+    _, levelToNodes = self.bfs(leaf, adj)
 
-    maxLevel = max(map.keys())
+    maxLevel = max(levelToNodes.keys())
     # print(maxLevel)
     # print(map)
     res = []
     if maxLevel % 2 != 0:
-      res.append(map[maxLevel // 2][0])
-      res.append(map[maxLevel // 2 + 1][0])
+      res.append(levelToNodes[maxLevel // 2][0])
+      print('levelToNodes', levelToNodes)
+      print('levelToNodes[maxLevel/2]', levelToNodes[maxLevel // 2])
+      res.append(levelToNodes[maxLevel // 2 + 1][0])
     else:
-      res.append(map[maxLevel // 2][0])
+      res.append(levelToNodes[maxLevel // 2][0])
 
-    print(res)
+    # print(res)
     res.sort()
     return res
 
+  # return farthest node and 
   def bfs(self, node, adj)->tuple[int, dict]:
     visit = set()
     queue = deque([])
     level = 0
     leaf = None
-    map = {}
+    levelToNodes = collections.defaultdict(list)
 
     # initial
     queue.append(node)
@@ -45,9 +50,7 @@ class Solution:
         # expand
         curr  = queue.popleft()
         leaf = curr
-        res = map.get(level, [])
-        res.append(curr)
-        map[level] = res
+        levelToNodes[level].append(curr)
         # print(curr)
         
         # generate
@@ -58,22 +61,10 @@ class Solution:
       
       level += 1
       
-    print(map)
-    print(leaf)
-    return [leaf, map]
+    # print(levelToNodes)
+    # print(leaf)
+    return [leaf, levelToNodes]
   
-  def getGraph(self, edges, adj):
-    for e in edges:
-      a, b = e
-      neis = adj.get(a, [])
-      neis.append(b)
-      adj[a] = neis
-
-      neis = adj.get(b, [])
-      neis.append(a)
-      adj[b] = neis
-
-        
 
 sol = Solution()
 n = 6

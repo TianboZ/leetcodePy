@@ -7,12 +7,17 @@ a undirected graph is tree when
 any 2 cases satisfy, it is a tree
 """
 
+import collections
 from typing import List
 
 class Solution:
   def validTree(self, n: int, edges: List[List[int]]) -> bool:
     adj = {}
-    self.getGraph(adj, edges)
+    adj  = collections.defaultdict(list)
+    for e in edges:
+        a, b = e
+        adj[a].append(b)
+        adj[b].append(a)
     cnt = 0 # connected areas
     visit = set()
     
@@ -41,16 +46,6 @@ class Solution:
       
     return False
 
-  def getGraph(self, adj, edges):
-    for e in edges:
-      a, b = e
-      neis = adj.get(a, [])
-      neis.append(b)
-      adj[a] = neis
-
-      neis = adj.get(b, [])
-      neis.append(a)
-      adj[b] = neis
 
 
 

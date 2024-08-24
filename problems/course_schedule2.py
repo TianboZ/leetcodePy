@@ -1,12 +1,18 @@
 from typing import List
-
+import collections
 
 class Solution:
   def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-    adj = {}
+    # build adj list
+    adj = collections.defaultdict(list)
+    for p in prerequisites:
+      a, b = p
+      adj[a].append(b)
+
     visit = {} # <course, state>   state=1: visting   state=2: visited
-    self.getGraph(prerequisites, adj)
+    
     path = []
+    
     for c in range(numCourses):
       if (c not in visit):
         if not self.topo(adj, visit, c, path):
@@ -23,18 +29,12 @@ class Solution:
       return True
 
     # recursive rule
-    visit[node] = 1
+    visit[node] = 1   # visiting
     for nei in adj.get(node, []):
       if not self.topo(adj, visit, nei, path):
         return False
-    visit[node] = 2
+    visit[node] = 2    # visiting
     path.append(node)
     return True
-
-  def getGraph(self, pre, adj: dict):
-    for a, b in pre:
-      neis = adj.get(a, [])
-      neis.append(b)
-      adj[a] = neis
 
         

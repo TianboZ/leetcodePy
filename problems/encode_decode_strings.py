@@ -22,7 +22,7 @@ class Codec:
     """Decodes a single string to a list of strings.
     """
     res = []
-    chunks  = s.split(DE)
+    chunks = s.split(DE)
     for chunk in chunks:
       chunk = chunk.replace(ENCODE, ORI)
       res.append(chunk)

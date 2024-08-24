@@ -15,9 +15,16 @@ print(arr)
 arr.reverse()
 print(arr)
 
-# sory 
+# sorting
 arr.sort()
 print(arr)
+
+# https://www.freecodecamp.org/news/lambda-sort-list-in-python/#heading-what-is-a-lambda-function
+my_list = [('tianbo', 100), ('cherry', 1), ('apple', 3), ('banana', 2),  ]
+
+# Sort by the second element of each tuple
+my_list.sort(key=lambda x: x[1])
+print(my_list)
 
 # shallow copy array
 arr.append({'a': 1})
