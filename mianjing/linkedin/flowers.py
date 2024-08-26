@@ -46,13 +46,13 @@ class Solution:
     return False
   
   def canPlaceFlowers2(self, flowerbed: List[int], n: int) -> bool:
-    oldCnt = 0
-    newFlowerIdx = []
+    cnt = 0  # original flowers count
+    flowersIdx = []
 
     for i, ele in enumerate(flowerbed):
       if ele == 1:
-        oldCnt += 1
-        newFlowerIdx.append(i)
+        cnt += 1
+        flowersIdx.append(i)
         continue
       else:
         # check prev
@@ -60,7 +60,7 @@ class Solution:
         if prev >= 0 and flowerbed[prev] == 1:
           continue
         
-        if newFlowerIdx and newFlowerIdx[-1] == prev:
+        if flowersIdx and flowersIdx[-1] == prev:
           continue
 
         # check right
@@ -68,9 +68,9 @@ class Solution:
         if next < len(flowerbed) and flowerbed[next] == 1:
           continue
 
-        newFlowerIdx.append(i)
+        flowersIdx.append(i)
     
-    return len(newFlowerIdx) - oldCnt > n
+    return len(flowersIdx) - cnt > n
 
 
 

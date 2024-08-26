@@ -10,12 +10,13 @@ solution:
      2  3
          \
          4
-serialize string: "1, 2, '' , 3, '', 4, '', '' "
+serialize string: " 1,2,#,#,3,#,4,#,# "
 
 very slow
 
+solution 2:
 optimization:
-one pass
+traverse the tree and build serialized tree
 
 
 """
@@ -30,7 +31,7 @@ class Solution:
   # traverse tree, return serialized subtree
   def dfs(self, root)->str:
     if not root:
-      return ''
+      return '#'
 
     left = self.dfs(root.left)
     right = self.dfs(root.right)

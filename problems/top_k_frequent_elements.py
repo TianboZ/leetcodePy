@@ -1,3 +1,4 @@
+import collections
 from typing import *
 import heapq
 
@@ -24,21 +25,18 @@ class Cell:
 
 class Solution:
   def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-    map = {}
-    for n in nums:
-      freq = map.get(n, 0) + 1
-      map[n] = freq
-    
-    pq = []  # min heap
+    map = collections.Counter(nums)
+    minheap = []  #[[val, freq], []...  ]
+    print(map)
 
-    for key, val in map.items():
-      heapq.heappush(pq, Cell(key, val))
-      if len(pq) > k:
-        heapq.heappop(pq)
+    for num, freq in map.items():
+      heapq.heappush(minheap, [freq, num])
+      if len(minheap) > k:
+        heapq.heappop(minheap)
 
     res = []
-    for i in pq:
-      res.append(i.key)
+    for pair in minheap:
+      res.append(pair[1])
     
     return res
 

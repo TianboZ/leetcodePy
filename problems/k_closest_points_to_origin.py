@@ -12,18 +12,18 @@ class Cell:
   
 class Solution:
   def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-    heap = [] # max heap
+    maxheap = [] # max heap
     res = []
 
     for p in points:
       dis = p[0] ** 2 + p[1] ** 2
-      heapq.heappush(heap, Cell(dis, p))
+      heapq.heappush(maxheap, Cell(dis, p))
 
-      if len(heap) > k:
-        heapq.heappop(heap)
+      if len(maxheap) > k:
+        heapq.heappop(maxheap)
     
-    while heap:
-      res.append(heapq.heappop(heap).cor)
+    while maxheap:
+      res.append(heapq.heappop(maxheap).cor)
     
     return res
 
