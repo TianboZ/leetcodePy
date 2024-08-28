@@ -77,7 +77,84 @@ class Solution:
     
     return 0  
 
-sol = Solution()
+
+"""
+complexity:
+n is word list length, m is word avg length
+
+time: 
+build adj graph = O(m * n * n) = O(n^2 * m)
+bfs = O(V + E) = O(n)
+
+total O(n + m*n^2) = O(m * n^2)
+
+"""
+
+import collections
+class Solution2:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        adj = collections.defaultdict(set)
+        self.getAdj(beginWord, endWord, wordList, adj)
+        print(adj)    
+        
+        res = self.bfs(adj,beginWord, endWord)
+        return res
+    
+    
+    def getAdj(self, begin, end, words, adj):
+        words.insert(0, begin)
+        for w in words:
+            for w2 in words:
+                if w == w2:
+                    continue
+                if self.isOneCharDiff(w, w2):
+                    adj[w].add(w2)
+                    adj[w2].add(w)
+        
+        
+    def bfs(self, adj, start, target):
+        queue = deque([])
+        visit = set()
+        dis = 0
+        
+        # init
+        queue.append(start)
+        visit.add(start)
+        
+        
+        #  terminate
+        while queue:
+            size = len(queue)
+            for _ in range(size):
+                #   expand
+                curr = queue.popleft()
+                
+                if curr == target:
+                    return dis + 1
+                    print(dis)
+                
+                # generate
+                for nei in adj.get(curr, []):
+                    if nei not in visit:
+                        queue.append(nei)
+                        visit.add(nei)
+            dis += 1
+        
+        return 0
+                
+        
+    def isOneCharDiff(self, s1, s2):
+        if len(s1) != len(s2):
+            return False
+        cnt = 0
+        # print(s1)
+        for i in range(len(s1)):
+            if s1[i] != s2[i]:
+                cnt += 1
+                if cnt > 1:
+                    return False
+        return True
+sol = Solution2()
 beginWord = "hit"
 endWord = "cog"
 wordList = ["hot","dot","dog","lot","log","cog"]

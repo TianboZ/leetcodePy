@@ -1,6 +1,6 @@
-import heapq as hq
 from typing import *
 from UtilityClasses import *
+import heapq
 
 
 class Solution:
@@ -25,7 +25,6 @@ class Solution:
     return dummy.next
       
         
-import heapq
 class Node:
   def __init__(self, node):
     self.node = node

@@ -18,18 +18,19 @@ class Solution(object):
       return
 
     # recursive rule
-    c = arr[i]
-
+    j = i
+    c = arr[j]
     # branch 1, add arr[i]
     path.append(c)
-    self.dfs(arr, i + 1, path)
+    self.dfs(arr, j + 1, path)
     path.pop()
 
     # branch 2, not add arr[i]
-    while i + 1 < len(arr) and arr[i] == arr[i + 1]:
-      i += 1 # skip all consequtive same value
-    self.dfs(arr, i + 1, path)
+    # skip all duplicate 
+    while j < len(arr) - 1 and arr[j] == arr[j + 1]:
+      j += 1
 
+    self.dfs(arr, j + 1, path)
 
 sol = Solution()
 res = sol.subSets('acac')
