@@ -38,49 +38,74 @@ set1.add(n3)
 print(set1)  # 2 itmes
 print(len(set1))   # 2
 
-print('----Objects with Same Hash and Equality--------')
-class TreeNodeWithCustomHashFunction:
-    def __init__(self, val):
-        self.val = val
+# list is not hashable, tuple can
+# dedup a list
+arrWithDup = [1, 1, 1, 2]
+arrNoDup = list(set(arrWithDup))
+print('arrNoDup:', arrNoDup)
 
-    def __hash__(self) -> int:
-        # return self.val
-        return 1111
-
-    def __eq__(self, other):
-        if isinstance(other, TreeNodeWithCustomHashFunction):
-            return self.val == other.val
-        return False
-
-# Objects with the same hash but different values
-m1 = TreeNodeWithCustomHashFunction(1)
-m2 = TreeNodeWithCustomHashFunction(12)
-s4 = set()
-s4.add(m1)
-s4.add(m2)
-print(s4)  # Output: 2 because their 'val' attributes are different
+# dedup list of list
+arrOfArr = [[1,2], [1, 2], [1,3]]
+# arrOfArrNoDup = list(set(arrOfArr)) # typeerror: unhashable type: 'list'
+arrSet = set()
+for arr in arrOfArr:
+  pair = tuple(arr)
+  arrSet.add(pair)
+print('arrOfArr:', arrSet)
 
 
-print('---- Objects with Same Hash and Forced Equality--------')
+# visit 
+visit = set()
+visit.add((1,2))
+visit.add((1,2))
+print('visit:',visit)
+visit.remove((1,2))
+print('visit:', visit)
 
-class ClassWithHashAndEq:
-  def __init__(self, val):
-    self.val = val
-    self.left = None
-    self.right = None
 
-  # how to customize hash function
-  def __hash__(self) -> int:
-    return 100
+# print('----Objects with Same Hash and Equality--------')
+# class TreeNodeWithCustomHashFunction:
+#     def __init__(self, val):
+#         self.val = val
 
-  def __eq__(self, other) -> bool:
-    return True
+#     def __hash__(self) -> int:
+#         # return self.val
+#         return 1111
 
-m1 = ClassWithHashAndEq(1)
-m2 = ClassWithHashAndEq(12)
-print(hash(m1), hash(m2))
-print(m1 == m2) # true, they are differernt object
-set3 = set()
-set3.add(m1)
-set3.add(m2)
-print(set3) # size 1, because __eq__ always returns True
+#     def __eq__(self, other):
+#         if isinstance(other, TreeNodeWithCustomHashFunction):
+#             return self.val == other.val
+#         return False
+
+# # Objects with the same hash but different values
+# m1 = TreeNodeWithCustomHashFunction(1)
+# m2 = TreeNodeWithCustomHashFunction(12)
+# s4 = set()
+# s4.add(m1)
+# s4.add(m2)
+# print(s4)  # Output: 2 because their 'val' attributes are different
+
+
+# print('---- Objects with Same Hash and Forced Equality--------')
+
+# class ClassWithHashAndEq:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+#   # how to customize hash function
+#   def __hash__(self) -> int:
+#     return 100
+
+#   def __eq__(self, other) -> bool:
+#     return True
+
+# m1 = ClassWithHashAndEq(1)
+# m2 = ClassWithHashAndEq(12)
+# print(hash(m1), hash(m2))
+# print(m1 == m2) # true, they are differernt object
+# set3 = set()
+# set3.add(m1)
+# set3.add(m2)
+# print(set3) # size 1, because __eq__ always returns True

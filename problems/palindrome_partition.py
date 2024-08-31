@@ -61,34 +61,28 @@ class Solution:
 # better, cleaner
 class Solution2:
   def partition(self, s: str) -> List[List[str]]:
-    cuts = [0]   # e.g. [0, 2, 4, .]  means substring[0, 1] and substring[2, 4]
     path = []
     self.ans = []
-    self.dfs(0, s, cuts, path)
+    self.dfs(0, s, path)
     
     return self.ans
-  # path records all cuts index, i is index of string, path is array of substring
-  def dfs(self, i, s, cuts, path):
-    # print('i:',i)
+  
+  # i is index of string, path is array of substring
+  def dfs(self, i, s, path):
     # baes case
     if i == len(s):
-      # print('111')
-      # print(cuts, path)
       self.ans.append(list(path))
       return
 
     # recursive rule
-    prev = cuts[-1]
-    for j in range(prev + 1, len(s) + 1):
-      sub = s[prev:j]
+    for j in range(i + 1, len(s) + 1):
+      sub = s[i: j]
       if not self.isP(sub):
         continue
       
       # print(sub)
-      cuts.append(j)
       path.append(sub)
-      self.dfs(j, s, cuts, path)
-      cuts.pop()
+      self.dfs(j, s, path)
       path.pop()
 
   def isP(self, s):
