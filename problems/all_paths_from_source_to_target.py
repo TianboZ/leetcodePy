@@ -20,9 +20,7 @@ class Solution:
   def dfs(self, graph, node, path, res, target):
     # base case
     if node == target:
-      path.append(node)
-      res.append(path.copy())
-      path.pop()
+      res.append(list(path) + [node])
       return
 
     # recursive rule

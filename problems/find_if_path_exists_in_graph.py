@@ -19,27 +19,20 @@ space
 4. total: O(V + E)
 
 '''
-
+import collections
 class Solution:
   def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
     visit = set()
-    adj = {}
-    graph = self.getGraph(edges, adj)
-    return self.dfs(source, destination, visit, graph)
-
-  def getGraph(self, edges: List[List[int]], adj):
-    for n1, n2 in edges:
-      if adj.get(n1):
-        adj.get(n1).append(n2)
-      else:
-        adj[n1] = [n2]
-      
-      if adj.get(n2):
-        adj.get(n2).append(n1)
-      else:
-        adj[n2] = [n1]
     
-    return adj
+    # build adj graph
+    adj = collections.defaultdict(list)
+    for a, b in edges:
+      adj[a].append(b)
+      adj[b].append(a)
+    
+    # tarverse graph
+    return self.dfs(source, destination, visit, adj)
+
 
   # return true if find the node
   def dfs(self, curr, end, visit, graph)->bool:
