@@ -15,48 +15,52 @@ space:O(N)
 
 from typing import List
 
-
+from collections import defaultdict
 class Solution:
   def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-    adj = {}
-    self.getGraph(adj, tickets)
-    path = []
-    ans = []
-    self.dfs('JFK', adj, path, len(tickets) + 1, ans)
-    return ans[0]
-
-  def dfs(self, node, adj, path, length, ans):
-    # base case
-    if ans:
-      return    
+    self.total = len(tickets) + 1
     
+    # build graph
+    adj = defaultdict(list)
+    for a, b in tickets:
+      adj[a].append(b)
+    for [k, v] in adj.items():
+      v.sort()
+
+    # build ans
+    self.ans = None
+    self.dfs('JFK', adj, [])
+    return self.ans
+
+  def dfs(self, node, adj, path):
+    # base case
+    if self.ans:
+      return
+        
+    if not node:
+      return
+
     # recursive rule
     path.append(node)
 
-    if len(path) == length:
-      if not ans:
-        ans.append(path.copy())
-      return  
+    if len(path) == self.total:
+      print(path)
+      self.ans = list(path)
+      path.pop()
+      return
 
     neis = adj.get(node, [])
-    for i, nei in enumerate(neis):
-      if nei:
-        ori = neis[i]
-        neis[i] = '' # mark the path as visited
-        self.dfs(nei, adj, path, length, ans)
-        neis[i] = ori
-    path.pop()
+    for i in range(len(neis)):
+      nei = neis[i]
+      if not nei:
+        continue
 
-  def getGraph(self, adj, tickets):
-    for t in tickets:
-      src, end = t
-      if src in adj:
-        adj.get(src).append(end)
-      else:
-        neis = [end]
-        adj[src] = neis
-    for k, v in adj.items():
-      v.sort()
+      next = nei
+      neis[i] = ''  # mark this ticket used
+      self.dfs(next, adj, path)
+      neis[i] = next # back tracking
+
+    path.pop()
 
 # test
 sol = Solution()
