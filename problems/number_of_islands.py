@@ -1,4 +1,7 @@
 from collections import deque
+from typing import List
+
+# BFS
 class Solution(object):
   def numIslands(self, grid):
     """
@@ -13,11 +16,11 @@ class Solution(object):
     m = len(grid)
     n = len(grid[0])
     cnt = 0 # cound connected areas
-    visit = [[False for _ in range(n)] for _ in range(m)]
+    visit = set()
 
     for i in range(m):
       for j in range(n):
-        if grid[i][j] == "1" and not visit[i][j]:
+        if grid[i][j] == "1" and (i, j) not in visit:
           cnt += 1
           self.bfs(grid, visit, i, j, m, n)
 
@@ -29,7 +32,7 @@ class Solution(object):
 
     # inital
     queue.append([i, j])
-    visit[i][j] = True
+    visit.add((i, j))
 
     # terminate
     while queue:
@@ -41,9 +44,33 @@ class Solution(object):
       for dx, dy in dir:
         i2 = i1 + dx
         j2 = j1 + dy
-        if i2 >= 0 and i2 < m and j2 >= 0 and j2 < n and not visit[i2][j2] and grid[i2][j2] == "1":
-          visit[i2][j2] = True
+        if 0 <= i2 < m and 0<= j2 < n and (i2, j2) not in visit and grid[i2][j2] == "1":
+          visit.add((i2, j2))
           queue.append([i2, j2])
+
+dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+
+# DFS
+class Solution2:
+  def numIslands(self, grid: List[List[str]]) -> int:
+    visit = set()
+    m = len(grid)
+    n = len(grid[0])
+    cnt = 0
+    for i in range(m):
+      for j in range(n):
+        if grid[i][j] == '1' and (i, j) not in visit:
+          self.dfs(i, j , grid, visit)
+          cnt+=1
+    return cnt
+  
+  def dfs(self, i, j, grid, visit):
+    if (i, j) in visit:
+      return
     
-
-
+    visit.add((i, j))
+    for dx, dy in dirs:
+      i2 = i + dx
+      j2 = j + dy
+      if 0 <= i2 < len(grid) and 0 <= j2 < len(grid[0]) and grid[i2][j2] == '1':
+        self.dfs(i2, j2, grid, visit)

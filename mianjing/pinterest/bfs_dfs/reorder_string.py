@@ -1,7 +1,8 @@
-from collections import Counter
-import heapq
-
 """
+question:
+given arr = [a, a, a, b, b, c, c..], 相邻不一样
+LC 767
+
 
 solution:
 - find freq of each char
@@ -11,44 +12,10 @@ solution:
 a: 4
 b: 2
 c: 1
-
---
-a 
-
-a: 3
-b: 2
-c: 1
-
-ab
-
-a: 3
-b: 1
-c: 1
-
-aba
-a: 2
-b: 1
-c: 1
-
-abab
-a: 2
-b: 0
-c: 1
-
-ababa
-a: 1
-b: 0
-c: 1
-
-ababac
-a: 1
-b: 0
-c: 0
-
-ababaca
-all 0
-
 """
+from collections import Counter
+import heapq
+
 class Solution:
   def reorganizeString(self, s: str) -> str:
     maxheap = []
