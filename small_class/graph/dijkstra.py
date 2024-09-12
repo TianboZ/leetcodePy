@@ -32,11 +32,11 @@ class Solution:
 
       # generate
       for n2, w2 in adj[n1]:
-        dis = w1 + w2
+        totalCost = w1 + w2
         # if n2 in visit: continue         WRONG!  because in future, it nevers get update if there is better value
-        if n2 not in visit or dis < visit.get(n2):
-          heapq.heappush(heap, [dis, n2])
-          visit[n2] = dis
+        if n2 not in visit or totalCost < visit.get(n2):
+          heapq.heappush(heap, [totalCost, n2])
+          visit[n2] = totalCost
 
     for i in range(n):
       if  i not in visit:
@@ -63,6 +63,7 @@ class Solution:
       curr = heapq.heappop(heap)
       w1, n1 = curr
       print('expand', curr)
+      
       # deduplicate
       if n1 in visit:
         continue
