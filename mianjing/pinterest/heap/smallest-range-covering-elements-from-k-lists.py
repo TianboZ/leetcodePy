@@ -8,13 +8,13 @@ class Solution:
     res = [0, 0]
     rangeVal = 1000000  # A very large number for the initial range
     
-    # Initialize the priority queue with the first element from each list
+    # Initialize the minheap with the first element from each list
     for i in range(len(nums)):
       val = nums[i][0]
       maxVal = max(maxVal, val)
       heapq.heappush(minheap, [val, i, 0])
     
-    # Continue until the priority queue has elements from all lists
+    # Continue until the heap has elements from all lists
     while len(minheap) == len(nums):
       curr = heapq.heappop(minheap)
       currMinVal, i, j = curr
@@ -24,7 +24,7 @@ class Solution:
         res = [currMinVal, maxVal]
         rangeVal = maxVal - currMinVal
       
-      # If the current list has more elements, add the next element to the priority queue
+      # If the current list has more elements, add the next element to the heap
       if j + 1 < len(nums[i]):
         nextVal = nums[i][j + 1]
         heapq.heappush(minheap, [nextVal, i, j + 1])

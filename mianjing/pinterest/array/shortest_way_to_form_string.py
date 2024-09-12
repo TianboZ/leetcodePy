@@ -2,8 +2,8 @@
 solution:
 xyz -> xz + y + xz
 
-- iterate target
-  - iterate source, find the longest substring 
+- iterate each char in target
+  - iterate each char in source, find the longest substring in target that can match subsequence from source
 
 compleixty:
 s, t is source and target string length

@@ -49,7 +49,7 @@ class Solution:
           heapq.heappush(maxheap, [freq2 + 1, val2])
           
         # add curr1 back to heap
-        heapq.heappush(maxheap, [freq1, val1])
+        heapq.heappush(maxheap, curr1)
     
     print(res)
     return ''.join(res)

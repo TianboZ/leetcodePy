@@ -1,6 +1,6 @@
 """
 solution:
-DFS find all path
+DFS find all path, TLE
 
 complexity:
 branch = 4
@@ -9,6 +9,7 @@ level = m * n
 time O(brancn^level) = O(4 ^ (m*n))
 space O(m * n)
 """
+from collections import deque
 from typing import List
 
 dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
@@ -61,20 +62,55 @@ class Solution:
   def isValid(self, i, j, grid):
     return 0 <= i < len(grid) and 0 <= j < len(grid[0])
   
-  
-  
-  """
-solution:
-DFS find all path
+"""
+solution2:
+BFS
+新思想 !!! each state is combination of (row, col) and blocks used 
 
-complexity:
-branch = 4
-level = m * n
-
-time O(brancn^level) = O(4 ^ (m*n))
-space O(m * n)
 """
 
 class Solution2:
   def shortestPath(self, grid: List[List[int]], k: int) -> int:
+    # init
+    visit = set()
+    queue = deque([(0, 0, 0)])  # (row, col, blocks)
+    visit.add((0, 0, 0)) # (row, col, blocks)  !!! each state is combination of (row, col) and blocks used 
+    dis = 0
+    
+    # terminate
+    while queue:
+      size = len(queue)
+      for _ in range(size):
+        # expand 
+        curr = queue.popleft()
+        r, c, blocks = curr
+
+        # hit dst
+        if r == len(grid) - 1 and c == len(grid[0]) - 1:
+          print(dis)
+          return dis
+
+        # generate
+        for dir in dirs:
+          dr, dc = dir
+          r2 = dr + r
+          c2 = dc + c
+          if self.isValid(r2, c2, grid):
+            # if block
+            if grid[r2][c2] == 1 and blocks < k and (r2, c2, blocks + 1) not in visit:
+              queue.append((r2, c2, blocks + 1))
+              visit.add((r2, c2, blocks + 1))
+            
+            # not block
+            elif grid[r2][c2] == 0 and (r2, c2, blocks) not in visit:
+              queue.append((r2, c2, blocks))
+              visit.add((r2, c2, blocks))
+      dis += 1  
+
+    return -1
+        
+  def isValid(self, i, j, grid):
+    return 0 <= i < len(grid) and 0 <= j < len(grid[0])
+  
+
   
