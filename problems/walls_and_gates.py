@@ -1,25 +1,29 @@
 from typing import List
 from collections import deque
-from copy import deepcopy
 
-dir = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 wall = -1
 empty = 2147483647
 gate = 0
 
 class Solution:
+  # method 2, use visit hashset
   def wallsAndGates(self, rooms: List[List[int]]) -> None:
     """
     Do not return anything, modify rooms in-place instead.
     """
+
     m = len(rooms)
     n = len(rooms[0])
+
     q = deque([])
+    visit = set()
 
     for i  in range(m):
       for j in range(n):
         if rooms[i][j] == gate:
           q.append((i, j))
+          visit.add((i, j))
 
     dis = 0
     while q:
@@ -27,57 +31,17 @@ class Solution:
       for i in range(size):
         # expand
         curr = q.popleft()
-        (row, col) = curr
-
-        # generate
-        for d in dir:
-          (x, y) = d
-          x = row + x
-          y = col + y
-          if (x >= 0 and x < m and y >= 0 and y < n):
-            if rooms[x][y] == empty:
-              q.append((x, y))
-              rooms[x][y] = dis + 1 # implictly mark visit! 
-
-      dis += 1
-
-  # method 2, use visis array
-  def wallsAndGates2(self, rooms: List[List[int]]) -> None:
-    """
-    Do not return anything, modify rooms in-place instead.
-    """
-
-    m = len(rooms)
-    n = len(rooms[0])
-
-    q = deque([])
-    visit = deepcopy(rooms)
-
-    for i  in range(m):
-      for j in range(n):
-        visit[i][j] = False
-        if rooms[i][j] == gate:
-          q.append((i, j))
-          visit[i][j] = True
-
-    dis = 0
-    while q:
-      size = len(q)
-      for i in range(size):
-        # expand
-        curr = q.popleft()
-        (row, col) = curr
+        row, col = curr
+        # update distance from door
         rooms[row][col] = dis
 
         # generate
-        for d in dir:
-          (x, y) = d
-          x = row + x
-          y = col + y
-          if (x >= 0 and x < len(rooms) and y >= 0 and y < len(rooms[0])):
-            if not visit[x][y] and rooms[x][y] == empty:
-              q.append((x, y))
-              visit[x][y] = True
+        for dr, dc in dirs:
+          r2 = row + dr
+          c2 = col + dc
+          if (0 <= r2  < len(rooms) and 0 <= c2 < len(rooms[0])) and (r2, c2) not in visit and rooms[r2][c2] != -1:
+            q.append((r2, c2))
+            visit.add((r2, c2))
 
       dis += 1
 
