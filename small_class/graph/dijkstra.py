@@ -12,14 +12,14 @@ class Solution:
   # dedupe at generate
   def shortestPath(self, n: int, edges: List[List[int]], src: int) -> Dict[int, int]:
     # build grpah
-    adj = {}    # i: [total dis from src to current node, node]
+    adj = {}  # <node, [[n2, cost2], [n3, cost3]...]>
     for i in range(n):
       adj[i] = []
     
     for start, end, weight in edges:
       adj[start].append([end, weight])    
 
-    visit = {}  # mark visited when generating
+    visit = {}  # <node, min cost to get to this node>
 
     # initial
     heap = [[0, src]] # min heap   
