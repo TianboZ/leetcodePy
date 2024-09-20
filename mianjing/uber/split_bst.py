@@ -13,10 +13,10 @@ class Solution:
       return [root, root2]
     
     if root.val > target:
-      roots = self.splitBST(root.left, target)
-      root.left = roots[1]
-      return [roots[0], root]
+      r1, r2 = self.splitBST(root.left, target)
+      root.left = r2
+      return [r1, root]
     else:
-      roots = self.splitBST(root.right, target)
-      root.right = roots[0]
-      return [root, roots[1]]
+      r1, r2 = self.splitBST(root.right, target)
+      root.right = r1
+      return [root, r2]

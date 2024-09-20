@@ -104,7 +104,7 @@ class Solution2:
     adj = defaultdict(list)
     for a, b, nextCost in flights:
       adj[a].append([b, nextCost]) # <node, [ [n2, cost2], [n3, cost3]... ]>
-    visit = {} # <(node, stop), min cost to this node>
+    visit = {} # <(node, stop), min cost to this node with exact stop count>
     
     # init
     minheap = [[0, src, 0]] # [cost, node, stops]
