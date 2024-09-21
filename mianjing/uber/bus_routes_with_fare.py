@@ -6,7 +6,7 @@ def minCost(buses, fares, start, end):
     return 0
   
   # build graph
-  adj =defaultdict(list)  # <stop_id: [bus_id, bus_id2,....]>
+  adj = defaultdict(list)  # <stop_id: [bus_id, bus_id2,....]>
   for k, v in buses.items():
     for stopId in v:
       adj[stopId].append(k)
@@ -18,8 +18,8 @@ def minCost(buses, fares, start, end):
     return -1
   
   # init minheap
-  minheap = [] # record [[fair, bus_id], ....]
-  visit = {} # record bus_id 
+  minheap = [] # record [[total cost, bus_id], ....]
+  visit = {} # <bus_id, min cost>
   
   for busId in adj.get(start, []):
     heapq.heappush(minheap, [fares[busId], busId])
@@ -44,7 +44,6 @@ def minCost(buses, fares, start, end):
         if busId2 not in visit or fairTotal < visit[busId2]:
           visit[busId2] = fairTotal
           heapq.heappush(minheap, [fairTotal, busId2])
-    
     
 # test
 

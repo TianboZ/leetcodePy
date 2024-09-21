@@ -93,4 +93,4 @@ board2 = [
   ["a","a","a","a","a","a","a","a","a","a","a","a"]
 ]
 words = ['oath', 'lv', 'aaaaaaaaaaaaaaaaaaaaa']
-sol.findWords(board, words)
+sol.findWords(board2, words)

@@ -9,6 +9,7 @@ def solution(matrix, query):
   m, n = len(matrix), len(matrix[0])
   map = defaultdict(lambda :[None] * 4)
 
+  # top-left traverse
   topBlocker = [-1] * n
   for r in range(m):
     for c in range(n):
@@ -23,6 +24,7 @@ def solution(matrix, query):
         map[(r,c)][TOP] = abs(topBlocker[c] - r)
 
 
+  # bottom-right traverse
   bottomBlocker = [m] * n
   for r in range(m - 1, -1, -1):
     rightBlocker = n
