@@ -10,8 +10,7 @@ class Solution:
       return []
 
     # build adj graph
-    adj = defaultdict(set)
-    self.getAdj(beginWord, endWord, wordList, adj)
+    adj = self.getGraph(wordList)
 
     print(adj)
     # get shortest distance
@@ -44,16 +43,35 @@ class Solution:
       self.dfs(nei, depth + 1, path, visit, adj)
     visit.remove(node)
     path.pop()
-
-  def getAdj(self, begin, end, words, adj):
-    words.insert(0, begin)
+          
+  def getGraph(self, words):
+    adj = defaultdict(list)
     for w in words:
       for w2 in words:
         if w == w2:
           continue
-        if self.isOneCharDiff(w, w2):
-          adj[w].add(w2)
-          adj[w2].add(w)
+        
+        if len(w) != len(w2):
+          continue
+        
+        # count how many chars are diff
+        i = 0
+        cnt = 0
+        while i < len(w):
+          c1 = w[i]
+          c2 = w2[i]
+          if c1 != c2:
+            cnt += 1
+          if cnt > 1:
+            break
+            
+          i += 1
+        
+        if i == len(w) and cnt == 1:
+          adj[w].append(w2)
+  
+    print(adj)    
+    return adj
       
   def bfs(self, adj, start, target):
     queue = deque([])
@@ -84,19 +102,6 @@ class Solution:
     
     return 0, []
             
-      
-  def isOneCharDiff(self, s1, s2):
-    if len(s1) != len(s2):
-      return False
-    cnt = 0
-    # print(s1)
-    for i in range(len(s1)):
-      if s1[i] != s2[i]:
-        cnt += 1
-        if cnt > 1:
-          return False
-    return True
-
 """
 WRONG! 
 while BFS, record prev <node: parent node>, but it will only generate one valid solution
@@ -111,10 +116,10 @@ class Solution2:
       return []
 
     # build adj graph
-    adj = defaultdict(set)
-    self.getAdj(beginWord, endWord, wordList, adj)
+    adj = self.getGraph( wordList)
+    
 
-    # print(adj)
+    print(adj)
     # get shortest distance
     depth, prev = self.bfs(adj, beginWord, endWord) 
     print(depth, prev)
@@ -167,34 +172,40 @@ class Solution2:
             prev[nei].append(curr)
       dis += 1
     
+    # print(2)
+    # print(prev)
     return 0, []
        
        
-  def getAdj(self, begin, end, words, adj):
-    words.insert(0, begin)
+  def getGraph(self, words):
+    adj = defaultdict(list)
     for w in words:
       for w2 in words:
         if w == w2:
           continue
-        if self.isOneCharDiff(w, w2):
-          adj[w].add(w2)
-          adj[w2].add(w)     
+        
+        if len(w) != len(w2):
+          continue
+        
+        # count how many chars are diff
+        i = 0
+        cnt = 0
+        while i < len(w):
+          c1 = w[i]
+          c2 = w2[i]
+          if c1 != c2:
+            cnt += 1
+          if cnt > 1:
+            break
+            
+          i += 1
+        
+        if i == len(w) and cnt == 1:
+          adj[w].append(w2)
+  
+    print(adj)    
+    return adj
       
-
-  def isOneCharDiff(self, s1, s2):
-    if len(s1) != len(s2):
-      return False
-    cnt = 0
-    # print(s1)
-    for i in range(len(s1)):
-      if s1[i] != s2[i]:
-        cnt += 1
-        if cnt > 1:
-          return False
-    return True
-
-
-
 
 
 # test
